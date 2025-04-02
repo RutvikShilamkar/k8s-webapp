@@ -4,7 +4,7 @@ metadata:
   name: webapp-deployment
   labels:
     app: webapp
-  namespace: jenkins-space
+  namespace: jenkins
 spec:
   replicas: 3
   selector:
