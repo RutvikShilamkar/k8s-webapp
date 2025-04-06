@@ -4,7 +4,7 @@ metadata:
   name: webapp-deployment
   labels:
     app: webapp
-  namespace: jenkins
+  namespace: jenkins-3
 spec:
   replicas: 3
   selector:
@@ -17,7 +17,21 @@ spec:
     spec:
       containers:
         - name: webapp
-          image: webapp:3.0
+          image: webapp-db:1.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgredb-service:5432/mainDB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgredb-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgredb-secret
+                  key: POSTGRES_PASSWORD
+

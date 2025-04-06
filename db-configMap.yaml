@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgredb-config
+  namespace: jenkins-3
+data:
+  POSTGRES_DB: mainDB
+  POSTGRES_USER: postgres
